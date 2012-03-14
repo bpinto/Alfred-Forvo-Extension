@@ -18,7 +18,7 @@ fi
 	<key>disabled</key>
 	<false/>
 	<key>escapequery</key>
-	<true/>
+	<false/>
 	<key>escapequerybackquotes</key>
 	<true/>
 	<key>escapequerybrackets</key>
