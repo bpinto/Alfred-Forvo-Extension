@@ -1,13 +1,13 @@
 class Forvo
-  require 'nokogiri'
   require 'open-uri'
+  require 'base64'
 
   SEARCH_URL = "http://www.forvo.com/word/"
   WGET_PARAMETERS = "--directory-prefix=/tmp"
 
   def self.download(query, language = "/#de")
-    doc = Nokogiri::HTML(open("#{SEARCH_URL}#{query}#{language}"))
-    download_path = parse_download_path(doc)
+    html = open("#{SEARCH_URL}#{query}#{language}").read
+    download_path = parse_download_path(html)
     filename = parse_filename(download_path)
     file_path = "/tmp/#{filename}"
 
@@ -23,11 +23,10 @@ class Forvo
 
   private
 
-  def self.parse_download_path(page)
-    #encoded_path = page.xpath("//a[starts-with(@onclick, 'Play')]").first.attribute('onclick').value
-    #encoded_path.match /.*'(.*)',.*/
-    #::Base64.decode64($1)
-    "8979374/34/8979374_34_20952_1.mp3"
+  def self.parse_download_path(html)
+    html.match /a.*onclick=\"Play\((.*)\);.*/
+    parameters = $1.split(",").collect{|x| x.gsub("'", "")}
+    ::Base64.decode64(parameters[1])
   end
 
   def self.parse_filename(download_path)

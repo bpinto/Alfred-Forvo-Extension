@@ -2,7 +2,6 @@ source "http://rubygems.org"
 
 gem 'colorize'
 gem 'rake'
-gem 'nokogiri'
 
 group :development, :test do
   gem 'pry'
