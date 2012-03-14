@@ -8,7 +8,12 @@ class Forvo
   def self.download(query)
     language = "/#de"
 
-    html = open(download_url(query, language)).read
+    begin
+      html = open(download_url(query, language)).read
+    rescue OpenURI::HTTPError => exception
+      return "Word '#{query.join(" ")}' not found"
+    end
+
     download_path = parse_download_path(html)
     filename = parse_filename(download_path)
     file_path = "/tmp/#{filename}"
