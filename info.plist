@@ -7,11 +7,11 @@
 	<key>category</key>
 	<string>SCRIPTS</string>
 	<key>command</key>
-	<string>RET=$(php -f script.php -- "{query}")
+	<string>RET=$(ruby script.rb "{query}")
 if [[ "$RET" != http* ]]; then
 	echo $RET
 else
-	$(php -f curl.php -- "$RET")
+	echo $RET
 	$(afplay /tmp/${RET##*/})
 fi
 </string>
