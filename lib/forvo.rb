@@ -5,8 +5,10 @@ class Forvo
   SEARCH_URL = "http://www.forvo.com/word/"
   WGET_PARAMETERS = "--directory-prefix=/tmp"
 
-  def self.download(query, language = "/#de")
-    html = open("#{SEARCH_URL}#{query}#{language}").read
+  def self.download(query)
+    language = "/#de"
+
+    html = open(download_url(query, language)).read
     download_path = parse_download_path(html)
     filename = parse_filename(download_path)
     file_path = "/tmp/#{filename}"
@@ -22,6 +24,10 @@ class Forvo
   end
 
   private
+
+  def self.download_url(query, language)
+    "#{SEARCH_URL}#{query.join("%20")}#{language}"
+  end
 
   def self.parse_download_path(html)
     html.match /a.*onclick=\"Play\((.*)\);.*/
