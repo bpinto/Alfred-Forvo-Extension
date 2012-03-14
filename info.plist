@@ -8,10 +8,9 @@
 	<string>SCRIPTS</string>
 	<key>command</key>
 	<string>RET=$(ruby script.rb "{query}")
-if [[ "$RET" != http* ]]; then
+if [[ "$RET" != /tmp* ]]; then
 	echo $RET
 else
-	echo $RET
 	$(afplay /tmp/${RET##*/})
 fi
 </string>
