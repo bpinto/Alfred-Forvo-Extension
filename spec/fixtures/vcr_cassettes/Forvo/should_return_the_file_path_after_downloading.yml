@@ -19,7 +19,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 31 Mar 2012 20:34:32 GMT
+      - Sat, 31 Mar 2012 20:35:52 GMT
       Content-Type:
       - text/html
       Transfer-Encoding:
@@ -30,7 +30,7 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       Set-Cookie:
-      - PHPSESSID=B~vn6gn95dfgtobqcfpl5mip7r32; path=/; domain=.forvo.com
+      - PHPSESSID=B~sjdj0pj1rduhu8a6lpvhv9li10; path=/; domain=.forvo.com
       - id_user=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain=.forvo.com
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
@@ -204,7 +204,7 @@ http_interactions:
 
         ZXIiPgogICAKICA8ZGl2IGNsYXNzPSJoZWFkZXJfdG9wIj4KICAgIDxkaXYg
 
-        aWQ9ImRhdGEiPjxzdHJvbmc+MSwyMjEsNzA3PC9zdHJvbmc+IHdvcmRzIDxz
+        aWQ9ImRhdGEiPjxzdHJvbmc+MSwyMjEsNzA4PC9zdHJvbmc+IHdvcmRzIDxz
 
         dHJvbmc+MSwyOTYsMjI3PC9zdHJvbmc+IHByb251bmNpYXRpb25zIDxzdHJv
 
@@ -1454,7 +1454,7 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Sat, 31 Mar 2012 20:35:33 GMT
+  recorded_at: Sat, 31 Mar 2012 20:36:09 GMT
 - request:
     method: get
     uri: http://audio.forvo.com/mp3/8979374/34/8979374_34_20952_1.mp3
@@ -1476,7 +1476,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 31 Mar 2012 20:35:34 GMT
+      - Sat, 31 Mar 2012 20:36:09 GMT
       Content-Type:
       - audio/mpeg
       Content-Length:
@@ -1486,7 +1486,7 @@ http_interactions:
       Connection:
       - close
       Expires:
-      - Sun, 31 Mar 2013 20:35:34 GMT
+      - Sun, 31 Mar 2013 20:36:09 GMT
       Cache-Control:
       - max-age=31536000
       Accept-Ranges:
@@ -2411,5 +2411,5 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Sat, 31 Mar 2012 20:35:34 GMT
+  recorded_at: Sat, 31 Mar 2012 20:36:10 GMT
 recorded_with: VCR 2.0.0
