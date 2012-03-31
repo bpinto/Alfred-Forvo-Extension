@@ -4,22 +4,34 @@ class Forvo
 
   SEARCH_URL = "http://www.forvo.com/word/"
   WGET_PARAMETERS = "--directory-prefix=/tmp"
+  DOWNLOAD_LINKS_REGEX = /a.*onclick=\"Play\((.*)\);.*/
+
+  def initialize(query, language)
+    @query, @language = query, language
+  end
 
   def self.download(query)
-    language = "/#de"
+    forvo = Forvo.new query, "/#de"
 
-    begin
-      html = open(download_url(query, language)).read
-    rescue OpenURI::HTTPError => exception
-      return "Word '#{query.join(" ")}' not found"
-    end
+    download_links = forvo.fetch_download_links
+    return "Word '#{query.join(" ")}' not found" unless download_links.any?
 
-    download_path = parse_download_path(html)
-    filename = parse_filename(download_path)
-    file_path = "/tmp/#{filename}"
+    forvo.download download_links.first
+  end
+
+  def fetch_download_links
+    html = open_query_page
+    html.match DOWNLOAD_LINKS_REGEX
+
+    $1 ? parse_download_links($1) : []
+  end
+
+  def download(download_link)
+    filename = parse_filename download_link
+    file_path =  "/tmp/#{filename}"
 
     Net::HTTP.start("audio.forvo.com") do |http|
-      resp = http.get("/mp3/#{download_path}")
+      resp = http.get("/mp3/#{download_link}")
       open(file_path, "wb") do |file|
         file.write(resp.body)
       end
@@ -28,20 +40,28 @@ class Forvo
     file_path
   end
 
+
   private
 
-  def self.download_url(query, language)
-    "#{SEARCH_URL}#{query.join("%20")}#{language}"
+  def open_query_page
+    begin
+      open(query_page_url).read
+    rescue OpenURI::HTTPError => exception
+    end
   end
 
-  def self.parse_download_path(html)
-    html.match /a.*onclick=\"Play\((.*)\);.*/
-    parameters = $1.split(",").collect{|x| x.gsub("'", "")}
-    ::Base64.decode64(parameters[1])
+  def query_page_url
+    "#{SEARCH_URL}#{@query.join("%20")}#{@language}"
   end
 
-  def self.parse_filename(download_path)
-    download_path.match /.*\/.*\/(.*)/
+  def parse_download_links(params)
+    encoded_links = params.split(",").collect {|x| x.gsub("'", "")}
+    mp3_link = encoded_links[1]
+    [::Base64.decode64(mp3_link)]
+  end
+
+  def parse_filename(download_link)
+    download_link.match /.*\/.*\/(.*)/
     $1
   end
 end

@@ -7,16 +7,16 @@ describe Forvo, :vcr do
     Dir.entries("/tmp").any? {|x| file_path.include? x }.should be_true
   end
 
-  it 'should return the file_path when downloading' do
+  it 'should return the file path after downloading' do
     file_path = Forvo.download(['wie'])
     file_path.should match /\/tmp\/.*.mp3/
   end
 
-  it 'should receive words to download as an array' do
+  it 'should download a composed word' do
     Forvo.download(['guten', 'tag']).should be_true
   end
 
-  it 'should return a mp3 not found message when the search is unsuccessful' do
+  it 'should return a word not found message when the search is unsuccessful' do
     message = Forvo.download(['inexistent', 'word'])
     message.should =~ /'inexistent word'/
   end
