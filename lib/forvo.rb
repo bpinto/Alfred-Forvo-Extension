@@ -23,7 +23,7 @@ class Forvo
     html = open_query_page
     match_links = html.match DOWNLOAD_LINKS_REGEX
 
-    match_links ? parse_download_links(match_links[1]) : []
+    match_links ? parse_download_links(match_links[1..-1]) : []
   end
 
   def download(download_link)
@@ -55,9 +55,12 @@ class Forvo
   end
 
   def parse_download_links(params)
-    encoded_links = params.split(",").collect {|x| x.gsub("'", "")}
-    mp3_link = encoded_links[1]
-    [::Base64.decode64(mp3_link)]
+    params.collect do |param|
+      encoded_links = param.split(",").collect {|x| x.gsub("'", "")}
+      mp3_link = encoded_links[1]
+
+      ::Base64.decode64(mp3_link)
+    end
   end
 
   def parse_filename(download_link)
