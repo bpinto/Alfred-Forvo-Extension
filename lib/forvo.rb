@@ -3,7 +3,6 @@ class Forvo
   require 'base64'
 
   SEARCH_URL = "http://www.forvo.com/word/"
-  WGET_PARAMETERS = "--directory-prefix=/tmp"
   DOWNLOAD_LINKS_REGEX = /a.*onclick=\"Play\((.*)\);.*/
 
   def initialize(query, language)
