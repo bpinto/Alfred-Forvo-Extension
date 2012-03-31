@@ -21,9 +21,9 @@ class Forvo
 
   def fetch_download_links
     html = open_query_page
-    html.match DOWNLOAD_LINKS_REGEX
+    match_links = html.match DOWNLOAD_LINKS_REGEX
 
-    $1 ? parse_download_links($1) : []
+    match_links ? parse_download_links(match_links[1]) : []
   end
 
   def download(download_link)
