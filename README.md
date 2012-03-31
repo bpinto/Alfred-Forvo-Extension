@@ -27,6 +27,6 @@ Download
 [Forvo Listener](https://github.com/pfbruno/Alfred-Forvo-Extension/downloads)
 
 ## Version History ##
-### 1.0.0 - March 30, 2011###
+### 1.0.0 - March 31, 2012###
  
-- Commit: Initial Release
+- Download deutsch pronunciations
